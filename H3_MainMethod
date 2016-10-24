@@ -1,0 +1,29 @@
+//Ted Koo
+//CSI 213 
+//Assignment #3
+
+public class MainMethod {  // simple main method.
+ 
+ public static void main (String args[]) 
+ {
+  LinkedList list = new LinkedList(); 
+  
+  Node node1 = new Node("apple");
+  Node node2 = new Node("bus");
+  Node node3 = new Node("pen");
+  Node node4 = new Node("zoo");
+  
+  list.addNode(node1);
+  list.addNode(node2);
+  list.addNode(node3);
+  list.addNode(node4);
+  
+  list.printList();
+  
+  list.deleteNode("apple");  
+  
+  list.printList();
+ }
+
+}
+
