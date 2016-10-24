@@ -1,0 +1,210 @@
+//Ted Koo
+//CSI 213 
+//Assignment #3
+
+public class Node {
+ 
+   private String nodeString;              // using string form(?) of variable
+   private Node nxtNode;
+   private Node prvNode;
+   
+   
+   public Node(String something){          //changing something to other thing
+     nodeString = something;
+     nxtNode = prvNode = null;            //to set a new node with no data
+   }
+   
+   public void setString(String string){    //set method of string 
+     this.nodeString = string;              //string becomes nodeString
+   }
+   
+   public String getString(){               //get method of string
+     return nodeString;
+   }
+   
+   public void setPrv(Node node){          //set method of setting previous node to now node.
+     this.prvNode = node;
+   }
+   
+   public Node getPrv(){
+     return prvNode;
+   }
+   
+   public void setNxt(Node node){
+     this.nxtNode = node;
+   }
+   
+   public Node getNxt(){
+     return nxtNode;
+   }
+ }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ class LinkedList   // initializing the linkedlist class
+ {
+   public Node head;
+   
+   public void addNode(Node node){
+     if (head == null) // when head has no value in it.
+     {
+       head = node;
+     }
+     else  // head is not null ; when head node has a value . 
+     {
+       Node pointer;
+       pointer = head;
+       
+       int result = pointer.getString().compareTo(node.getString());  // a java inner method to compare between two strings which return the int value
+         
+       if ( result == 0) // when the first and the second string is completely identical
+       {
+         if ( pointer.getNxt() == null )
+           {
+             pointer.setNxt(node);
+             node.setPrv(pointer);
+           }
+           else
+           {
+             node.setNxt(pointer.getNxt());
+             node.setPrv(pointer);   
+             
+             pointer.getNxt().setPrv(node);
+             pointer.setNxt(node);
+           }
+       }
+       else if ( result > 0 )   // when returned positive result ; first string has bigger result than second string
+       {
+         node.setNxt(pointer);
+         pointer.setPrv(node);
+         head = node;
+       }
+       else if ( result < 0 )  // when returned negative result ;  first string has smaller result than second string
+       {
+         if ( pointer.getNxt() == null ) 
+         {
+           pointer.setNxt(node);
+           node.setPrv(pointer);
+         }
+         
+         else 
+         {
+           while ( pointer.getNxt() != null )  //when the node next to the pointer has sth in.
+           {
+             pointer=pointer.getNxt();
+             result = pointer.getString().compareTo(node.getString());
+             
+             if (result == 0) 
+             {
+               if ( pointer.getNxt() == null )  //when the node next to the pointer is empty
+               {
+                 pointer.setNxt(node);
+                 node.setPrv(pointer);
+                 
+                 return;  // ends; break out from the method
+               }
+               else  // when the node next to the pointer isn't empty
+               {
+                 node.setNxt(pointer.getNxt());
+                 node.setPrv(pointer);   
+             
+                 pointer.getNxt().setPrv(node);
+                 pointer.setNxt(node);
+                 
+                 return;
+               }
+             }
+             else if ( result > 0 ) // when the first string has bigger string value. which means the later in alphabetical order.
+             {
+               node.setNxt(pointer);
+               node.setPrv(pointer.getPrv());
+               
+               pointer.getPrv().setNxt(node);
+               pointer.setPrv(node);
+               
+               return;
+             }
+             else if ( result < 0 )  // when the second string has bigger string value. which means the sooner in alphabetical order.
+             {
+               if (pointer.getNxt() == null)
+               {
+                 pointer.setNxt(node);
+                 node.setPrv(pointer);
+                 
+                 return;
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+   
+   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   public void deleteNode(String node)
+   {
+     Node pointer;   // thinking in terms of pointer
+     pointer = head; // when pointer is at position head
+     
+     int result = pointer.getString().compareTo(node);   // result = comparing two strings
+      
+     
+     if (pointer.getNxt() == null)  // when the node next to the pointer has null value
+     {
+       if ( result == 0 )
+       {
+         head=head.getNxt();
+         
+         return;
+       }
+     }
+     else if (pointer.getNxt() != null) // when the node next to the pointer isn't empty.
+     {
+       if (result == 0)
+       {
+         head = head.getNxt();
+         
+         return;
+       }
+
+       while (pointer.getNxt() != null) //when the node next to the pointer isn't empty
+       {
+         pointer = pointer.getNxt();
+         
+         result = pointer.getString().compareTo(node); 
+         
+         if (result == 0)
+         {
+           if(pointer.getNxt() != null)
+           {
+             pointer.getNxt().setPrv(pointer.getPrv());
+             pointer.getPrv().setNxt(pointer.getNxt());
+             
+             return;
+           }
+           else if(pointer.getNxt() == null)
+           {
+             pointer.getPrv().setNxt(null);
+           }
+       
+           return;
+         }
+       }
+     }
+   }
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   public void printList()  
+   {
+     Node pointer = head;  // let pointer node start from head
+     
+     while ( pointer != null )  // using while loop to scan(?) starting from the starting part.
+     {
+       System.out.println(pointer.getString());
+       pointer = pointer.getNxt();
+     }
+   }
+       
+}
