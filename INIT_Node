@@ -1,0 +1,17 @@
+  int x = size ;
+        Node a = head ;
+        Node b = head.next ;
+        
+        for (int i = 0; i < (x-1); i++)
+        {
+            while (b.next != null)
+            {
+                if ( a.element > b.element)
+                {
+                    int temp = a.element;
+                    a.element = b.element ;
+                }
+                a = a.next ;
+                b = b.next ;
+            }
+        }
