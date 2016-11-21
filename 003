@@ -1,0 +1,11 @@
+for (int p=0 ; p<k-1 ; p++)
+		{
+			if(al.get(p) > al.get(p+1))
+			{
+				int tmp = al.get(p);
+				al.set(p,al.get(p+1));
+				al.set(p+1,tmp);
+				
+			}
+		}
+		System.out.println(al);
