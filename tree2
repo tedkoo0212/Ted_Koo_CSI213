@@ -1,0 +1,5 @@
+ public Tree (Object cargo, Tree left, Tree right) { 
+        this.cargo = cargo; 
+        this.left = left; 
+        this.right = right; 
+    } 
