@@ -1,0 +1,7 @@
+    public static int total (Tree tree) 
+    { 
+        if (tree == null)
+          return 0; 
+        Integer cargo = (Integer) tree.cargo; 
+        return cargo.intValue() + total (tree.left) + total (tree.right); 
+    } 
