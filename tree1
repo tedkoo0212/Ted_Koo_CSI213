@@ -1,0 +1,8 @@
+private JTree tree;
+public TreeDemo() 
+{
+    DefaultMutableTreeNode top = new DefaultMutableTreeNode("The Java Series");
+    createNodes(top);
+    tree = new JTree(top);
+    JScrollPane treeView = new JScrollPane(tree);
+}
