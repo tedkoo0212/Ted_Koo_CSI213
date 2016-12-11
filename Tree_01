@@ -1,0 +1,13 @@
+
+class Node
+{
+	String word;
+	Node left;
+	Node right;	
+	public Node(String data)
+	{
+		this.word = word;
+		left = null;
+		right = null;
+	}
+}
